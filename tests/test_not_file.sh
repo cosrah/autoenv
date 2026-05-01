@@ -4,14 +4,14 @@
 . "${ACTIVATE_SH}"
 
 #####
-# Tests what happens when .env is not a file.
+# Tests what happens when .autoenv.enter is not a file.
 #####
 
 # Prepare files/directories
-mkdir -pv 'a/.env' 'b'
-mkfifo 'b/.env'
+mkdir -pv 'a/.autoenv.enter' 'b'
+mkfifo 'b/.autoenv.enter'
 
-# .env is a directory
+# .autoenv.enter is a directory
 patterntest 'echo "Y" | cd a' '^$'
-# .env is a fifo
+# .autoenv.enter is a fifo
 patterntest 'echo "Y" | cd b' '^$'

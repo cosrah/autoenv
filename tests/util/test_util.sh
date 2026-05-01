@@ -2,7 +2,7 @@
 
 test_util.init_env() {
 	mkdir -p './dir'
-	printf '%s\n' "$1" > './dir/.env'
+	printf '%s\n' "$1" > './dir/.autoenv.enter'
 }
 
 test_util.activate_env() {

@@ -3,51 +3,51 @@
 . "${FUNCTIONS}"
 . "${ACTIVATE_SH}"
 
-# .env might be a symlink
-# .env might be a symlink to a parent directory
-# .env might be a symlink to a child directory
-# .env might be a symlink to a nonexistent file
+# .autoenv.enter might be a symlink
+# .autoenv.enter might be a symlink to a parent directory
+# .autoenv.enter might be a symlink to a child directory
+# .autoenv.enter might be a symlink to a nonexistent file
 # The current directory might be a symlink
 
 # Structure:
 # a
 #  - b
-#    - .env
+#    - .autoenv.enter
 #  - c
-#    - .env -> ../b/.env
+#    - .autoenv.enter -> ../b/.autoenv.enter
 #  - d
-#    - .env -> ../nonexistent
+#    - .autoenv.enter -> ../nonexistent
 #  - e -> c
 # b
 #   - c
-#     - .env -> ../.env
-#   - .env
+#     - .autoenv.enter -> ../.autoenv.enter
+#   - .autoenv.enter
 # c
 #   - d
-#     - .env
-#   - .env -> e/.env
+#     - .autoenv.enter
+#   - .autoenv.enter -> e/.autoenv.enter
 
 
 # Prepare files/directories
 mkdir -pv 'a/b' 'a/c' 'a/d'
 mkdir -pv 'b/c'
 mkdir -pv 'c/d'
-ln -s '../b/.env' 'a/c/.env'
-ln -s '../nonexistent' 'a/d/.env'
-ln -s '../.env' 'b/c/.env'
-ln -s 'd/.env' 'c/.env'
+ln -s '../b/.autoenv.enter' 'a/c/.autoenv.enter'
+ln -s '../nonexistent' 'a/d/.autoenv.enter'
+ln -s '../.autoenv.enter' 'b/c/.autoenv.enter'
+ln -s 'd/.autoenv.enter' 'c/.autoenv.enter'
 ln -s 'c' 'a/e'
-echo 'echo b' > 'a/b/.env'
-echo 'echo b' > 'b/.env'
-echo 'echo d' > 'c/d/.env'
+echo 'echo b' > 'a/b/.autoenv.enter'
+echo 'echo b' > 'b/.autoenv.enter'
+echo 'echo d' > 'c/d/.autoenv.enter'
 
-# .env is a smylink
+# .autoenv.enter is a smylink
 patterntest 'echo "Y" | cd a/c' '.*b$'
-# .env is a symlink to a parent directory
+# .autoenv.enter is a symlink to a parent directory
 patterntest 'yes "Y" | cd b/c' '.*b$'
-# .env is a symlink to a child directory
+# .autoenv.enter is a symlink to a child directory
 patterntest 'yes "Y" | cd c' '.*d$'
-# .env is a nonexistent symlink
+# .autoenv.enter is a nonexistent symlink
 patterntest 'echo "Y" | cd a/d' '^$'
 # The current directory is a symlink
 patterntest 'echo "Y" | cd a/e' '.*b$'

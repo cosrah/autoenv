@@ -4,7 +4,7 @@ load './util/init.sh'
 
 @test "Works with regular path" {
 	mkdir -p './dir'
-	printf '%s\n' 'echo a' > './dir/.env'
+	printf '%s\n' 'echo a' > './dir/.autoenv.enter'
 
 	run bash -c "
 		source '$BATS_TEST_DIRNAME/../activate.sh'

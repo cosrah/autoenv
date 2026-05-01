@@ -11,7 +11,7 @@ load './util/init.sh'
 
 @test "Works by default" {
 	mkdir -p './dir'
-	printf '%s\n' 'echo abc' > './dir/.env'
+	printf '%s\n' 'echo abc' > './dir/.autoenv.enter'
 
 	run bash -c "
 		source '$BATS_TEST_DIRNAME/../activate.sh'
@@ -20,6 +20,19 @@ load './util/init.sh'
 
 	assert_success
 	assert_line 'abc'
+}
+
+@test "Does not source .env by default" {
+	mkdir -p './dir'
+	printf '%s\n' 'echo abc' > './dir/.env'
+
+	run bash -c "
+		source '$BATS_TEST_DIRNAME/../activate.sh'
+		cd './dir'
+	"
+
+	assert_success
+	assert_output ''
 }
 
 @test "Fails by default" {
@@ -47,5 +60,4 @@ load './util/init.sh'
 	assert_success
 	assert_line 'special_filename'
 }
-
 

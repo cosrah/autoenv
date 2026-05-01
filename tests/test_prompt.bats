@@ -10,7 +10,7 @@ setup() {
 
 @test "Entering 'y' no longer prompts" {
 	mkdir -p './dir'
-	printf '%s\n' 'echo 123' > './dir/.env'
+	printf '%s\n' 'echo 123' > './dir/.autoenv.enter'
 
 	run bash -c "
 		source '$BATS_TEST_DIRNAME/../activate.sh'
@@ -34,7 +34,7 @@ setup() {
 
 @test "Entering 'n' prompts again" {
 	mkdir -p './dir'
-	printf '%s\n' 'echo 123' > './dir/.env'
+	printf '%s\n' 'echo 123' > './dir/.autoenv.enter'
 
 	run bash -c "
 		source '$BATS_TEST_DIRNAME/../activate.sh'
@@ -55,7 +55,7 @@ setup() {
 
 @test "Entering 'd' does not prompt again" {
 	mkdir -p './dir'
-	printf '%s\n' 'echo 123' > './dir/.env'
+	printf '%s\n' 'echo 123' > './dir/.autoenv.enter'
 
 	run bash -c "
 		source '$BATS_TEST_DIRNAME/../activate.sh'

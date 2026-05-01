@@ -5,9 +5,9 @@
 
 # Prepare files/directories
 mkdir -pv 'a/b' 'c/d'
-echo 'echo a' > "a/.env"
-echo 'echo b' > "a/b/.env"
-echo 'echo c' > "c/.env"
+echo 'echo a' > "a/.autoenv.enter"
+echo 'echo b' > "a/b/.autoenv.enter"
+echo 'echo c' > "c/.autoenv.enter"
 
 # Test simple cd
 patterntest 'echo "Y" | cd a/' '.*a$'

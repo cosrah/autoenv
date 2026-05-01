@@ -5,7 +5,7 @@
 
 # Prepare files/directories
 mkdir -pv 'a/b' 'a/bz'
-echo 'echo zulu' > 'a/b/.env.leave'
+echo 'echo zulu' > 'a/b/.autoenv.leave'
 
 AUTOENV_ENABLE_LEAVE=1
 cd 'a/b'
